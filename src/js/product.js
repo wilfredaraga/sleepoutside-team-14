@@ -8,15 +8,13 @@ const productId = getParam("product");
 const product = new ProductDetails(productId, dataSource)
 product.init();
 
-console.log(dataSource.findProductById(productId))
-
-function addProductToCart(product) {
-  setLocalStorage("so-cart", product);
+function addProductToCart(products) {
+  setLocalStorage("so-cart", products);
 }
 // add to cart button event handler
 async function addToCartHandler(e) {
-  const product = await dataSource.findProductById(e.target.dataset.id);
-  addProductToCart(product);
+  const products = await dataSource.findProductById(e.target.dataset.id);
+  addProductToCart(products);
 }
 
 // add listener to Add to Cart button
