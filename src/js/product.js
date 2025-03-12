@@ -9,7 +9,9 @@ const product = new ProductDetails(productId, dataSource)
 product.init();
 
 function addProductToCart(products) {
-  setLocalStorage("so-cart", products);
+  const cartItems = getLocalStorage("so-cart") || [];
+  cartItems.push(products);
+  setLocalStorage("so-cart", cartItems);
 }
 // add to cart button event handler
 async function addToCartHandler(e) {
