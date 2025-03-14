@@ -5,8 +5,11 @@ import ProductDetails from "./ProductDetails.mjs";
 const dataSource = new ProductData("tents");
 const productId = getParam("product");
 
-const product = new ProductDetails(productId, dataSource)
+const product = new ProductDetails(productId, dataSource);
+
+
 product.init();
+
 
 function addProductToCart(products) {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -20,6 +23,13 @@ async function addToCartHandler(e) {
 }
 
 // add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+const mainElement = document.querySelector("main");
+ console.log(mainElement);
+if (mainElement) {
+  console.log(mainElement);
+    const addToCartButton = mainElement.querySelector("h2");
+    console.log(addToCartButton);
+    // if(addToCartButton){
+    //     addToCartButton.addEventListener("click", addToCartHandler);
+    // }
+}
