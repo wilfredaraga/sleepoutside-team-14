@@ -22,14 +22,5 @@ async function addToCartHandler(e) {
   addProductToCart(products);
 }
 
-// add listener to Add to Cart button
-const mainElement = document.querySelector("main");
- console.log(mainElement);
-if (mainElement) {
-  console.log(mainElement);
-    const addToCartButton = mainElement.querySelector("h2");
-    console.log(addToCartButton);
-    // if(addToCartButton){
-    //     addToCartButton.addEventListener("click", addToCartHandler);
-    // }
-}
+
+
