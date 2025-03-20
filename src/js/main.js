@@ -1,8 +1,8 @@
-import ProductData from "../js/ProductData.mjs";
-import ProductList from "../js/ProductList.mjs";
+import ProductData from "./ProductData.mjs";
+import ProductList from "./ProductList.mjs";
 
-const dataSource = new ProductData("tents.json");
-const listElement = document.getElementById("product-list");
+const dataSource = new ProductData("tents");
 
-const tentList = new ProductList("tents", dataSource, listElement);
-tentList.init();
+const listElement = document.querySelector(".product-list") || document.createElement("ul");
+const productList = new ProductList("tents", dataSource, listElement);
+productList.init();

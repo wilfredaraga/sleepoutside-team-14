@@ -7,9 +7,11 @@ const dataSource = new ProductData("tents");
 const productId = getParam("product");
 
 const product = new ProductDetails(productId, dataSource);
+
 product.init();
 
-function addProductToCart(product) {
+
+function addProductToCart(products) {
   const cartItems = getLocalStorage("so-cart") || [];
   cartItems.push(product);
   setLocalStorage("so-cart", cartItems);
@@ -20,7 +22,5 @@ async function addToCartHandler(e) {
   addProductToCart(product);
 }
 
-// add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+
+
