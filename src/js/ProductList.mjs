@@ -1,4 +1,3 @@
-
 function productCardTemplate(product) {
   return `<li class="product-card">
     <a href="product_pages/?product=${product.Id}">
@@ -38,8 +37,5 @@ export default class ProductList {
         renderListWithTemplate(productCardTemplate,this.listElement,list);
        
     }
-
-
-  
 
 }
