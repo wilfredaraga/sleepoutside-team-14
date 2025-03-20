@@ -10,7 +10,6 @@ const listElement = document.querySelector(".product-list") || document.createEl
 const productList = new ProductList("tents", dataSource, listElement);
 productList.init();
 
-
 function updateCartCount() {
   // Get cart items from localStorage (or initialize an empty array if none exist)
   const cartItems = getLocalStorage("so-cart") || [];

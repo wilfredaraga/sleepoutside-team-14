@@ -220,3 +220,8 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/*Total Price in Cart*/
+.cart-footer {
+  display: none;
+}
