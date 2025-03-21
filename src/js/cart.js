@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -10,6 +10,7 @@ function renderCartContents() {
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
+  <button id = "clear">X</button>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -41,3 +42,36 @@ function totalInCart(itemsInCart) {
 }
 
 renderCartContents();
+
+function updateCartCount() {
+  // Get cart items from localStorage (or initialize an empty array if none exist)
+  const cartItems = getLocalStorage("so-cart") || [];
+
+  // Calculate the total number of items in the cart
+  let totalItems = 0;
+  cartItems.forEach(item => {
+    totalItems += item.quantity || 1; // Add item quantity, default to 1 if not defined
+  });
+
+  // Select the <em> element
+  const cartCountElement = document.querySelector(".cart em");
+
+  // Update the <em> element's content with the total number of items
+  if (cartCountElement) {
+    cartCountElement.textContent = totalItems;
+  }
+}
+
+updateCartCount();
+
+function deleteProductToCart(product) {
+  const cartItems = getLocalStorage("so-cart") || []; // get cart array of items from local storage if null set to empty array
+  const toDelete = cartItems.indexOf(product);
+  delete cartItems[toDelete];
+  setLocalStorage("so-cart", cartItems);
+}
+
+// add listener to Delete to Cart button
+document
+  .getElementById("clear")
+  .addEventListener("click", this.deleteProductToCart.bind(this));
