@@ -1,7 +1,7 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
 
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, loadHeaderFooter } from "./utils.mjs";
 
 const dataSource = new ProductData("tents");
 
@@ -30,3 +30,4 @@ function updateCartCount() {
 }
 
 updateCartCount();
+loadHeaderFooter();

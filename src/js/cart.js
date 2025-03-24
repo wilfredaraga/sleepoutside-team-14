@@ -1,4 +1,6 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter();
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -64,7 +66,7 @@ function updateCartCount() {
 
 updateCartCount();
 
-function deleteProductToCart(product) {
+/*function deleteProductToCart(product) {
   const cartItems = getLocalStorage("so-cart") || []; // get cart array of items from local storage if null set to empty array
   const toDelete = cartItems.indexOf(product);
   delete cartItems[toDelete];
@@ -74,4 +76,4 @@ function deleteProductToCart(product) {
 // add listener to Delete to Cart button
 document
   .getElementById("clear")
-  .addEventListener("click", this.deleteProductToCart.bind(this));
+  .addEventListener("click", this.deleteProductToCart.bind(this));*/
