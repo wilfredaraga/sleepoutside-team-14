@@ -46,25 +46,24 @@ export default class ProductDetails {
       setLocalStorage("so-cart", cartItems);
     }
 
-  renderProductDetails(selector) {
-        const productContainer = document.querySelector(selector);
-
-        const template = document.querySelector("#product-template");
-        const clone = template.content.cloneNode(true);
-        const productDetailsElement = clone.querySelector(".product-detail");
-
-        // Populate the cloned template with product data
-        clone.querySelector("h3").textContent = this.product.Brand.Name;
-        clone.querySelector("h2").textContent = this.product.NameWithoutBrand;
-        clone.querySelector("img").src = this.product.Image;
-        clone.querySelector("img").alt = this.product.NameWithoutBrand;
-        clone.querySelector(".product-card__price").textContent = `$${this.product.ListPrice}`;
-        clone.querySelector(".product__color").textContent = this.product.Colors[0].ColorName;
-        clone.querySelector(".product__description").innerHTML = this.product.DescriptionHtmlSimple;
-        clone.querySelector("#addToCart").dataset.id = this.product.Id;
-
-        productContainer.appendChild(productDetailsElement);
+  renderProductDetails() {
+    productDetailsTemplate(this.product);
 }
-
-
 }
+function productDetailsTemplate(product) {
+    return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
+      <h2 class="divider">${product.NameWithoutBrand}</h2>
+      <img
+        class="divider"
+        src="${product.Image.PrimaryLarge}"
+        alt="${product.NameWithoutBrand}"
+      />
+      <p class="product-card__price">$${product.FinalPrice}</p>
+      <p class="product__color">${product.Colors[0].ColorName}</p>
+      <p class="product__description">
+      ${product.DescriptionHtmlSimple}
+      </p>
+      <div class="product-detail__add">
+        <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+      </div></section>`;
+  }

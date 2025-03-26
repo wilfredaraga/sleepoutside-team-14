@@ -4,10 +4,10 @@ function productCardTemplate(product) {
     return `<li class="product-card">
         <a href="product_pages/?product=${product.Id}">
             <img
-            src="${product.Image}"
-            alt="${product.NameWithoutBrand}"/>
+            src="${product.Image.PrimaryMedium}"
+            alt="${product.Name}"/>
             <h3 class="card__brand">${product.Brand.Name}</h3>
-            <h2 class="card__name">${product.Name}</h2>
+            <h2 class="card__name">${product.NameWithoutBrand}</h2>
             <p class="product-card__price">$${product.FinalPrice}</p></a>
         </li>`;
 }
@@ -24,9 +24,10 @@ export default class ProductList{
     async init() {
        try {
         // the dataSource will return a Promise...so you can use await to resolve it.
-        const list = await this.dataSource.getData();
+        const list = await this.dataSource.getData(this.category);
         // next, render the list – ** future **
         this.renderList(list);
+        document.querySelector(".title").textContent = this.category;
        } catch (error) {
         console.log(error)
       // Handle error gracefully (e.g., display an error message to the user)
