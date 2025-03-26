@@ -1,4 +1,5 @@
 import { getParam, loadHeaderFooter } from "./utils.mjs";
+
 import ProductData from "./ProductData.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 
@@ -23,7 +24,5 @@ product.init();
 //   const products = await dataSource.findProductById(e.target.dataset.id);
 //   addProductToCart(products);
 // }
-
-
 
 
