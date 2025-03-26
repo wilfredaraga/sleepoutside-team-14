@@ -44,7 +44,7 @@ export default class ShoppingCart {
         let total = 0;
         if(this.cartItems && this.cartItems.length > 0){
             this.cartItems.forEach(item => {
-                total += item.FinalPrice * item.quantity;
+                total += item.FinalPrice;
             });
         }
         totalElement.textContent = `Total: $${total.toFixed(2)}`;
