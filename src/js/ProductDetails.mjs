@@ -56,7 +56,7 @@ export default class ProductDetails {
         // Populate the cloned template with product data
         clone.querySelector("h3").textContent = this.product.Brand.Name;
         clone.querySelector("h2").textContent = this.product.NameWithoutBrand;
-        clone.querySelector("img").src = this.product.Image;
+        clone.querySelector("img").src = this.product.Images.PrimaryLarge;
         clone.querySelector("img").alt = this.product.NameWithoutBrand;
         clone.querySelector(".product-card__price").textContent = `$${this.product.ListPrice}`;
         clone.querySelector(".product__color").textContent = this.product.Colors[0].ColorName;
