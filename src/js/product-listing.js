@@ -8,7 +8,7 @@ loadHeaderFooter();
 const dataSource = new ProductData();
 const category = getParam("category");
 const title = document.querySelector("#highlight");
-console.log(title);
+
 title.textContent = category;
 // then get the element you want the product list to render in
 const listElement = document.querySelector(".product-list") || document.createElement("ul");

@@ -1,4 +1,11 @@
-// Alert.js
+
+function convertToJson(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error("Bad Response");
+  }
+}
 
 export default class AlertMessage {
   constructor(alertsFilePath, mainElementSelector) {
@@ -6,15 +13,11 @@ export default class AlertMessage {
     this.mainElement = document.querySelector(mainElementSelector);
   }
 
+  
   async displayAlerts() {
     try {
-      const response = await fetch(this.alertsFilePath);
-      const alerts = await response.json();
-
-      console.log(alerts);
-
-    
-      if (alerts && alerts.length > 0) {
+        const alerts = await this.getData();
+       
         const alertListSection = document.createElement("section");
         alertListSection.classList.add("alert-list");
 
@@ -27,10 +30,18 @@ export default class AlertMessage {
           alertListSection.appendChild(alertParagraph);
         });
 
-        this.mainElement.prepend(alertListSection);
-      }
+        this.mainElement.appendChild(alertListSection);
+      
     } catch (error) {
-       return error;
+       throw new Error("Bad Response", error);
     }
   }
+
+ getData() {
+    return fetch(this.alertsFilePath)
+      .then(convertToJson)
+      .then((data) => data);
+  }
+
+  
 }

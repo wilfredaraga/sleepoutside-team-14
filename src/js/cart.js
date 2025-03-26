@@ -6,7 +6,7 @@ import ShoppingCart from "./shoppingCart.mjs";
 
 
 const cartItems = getLocalStorage("so-cart");
-console.log(cartItems);
+
 
 const shoppingCart = new ShoppingCart(
   cartItems,

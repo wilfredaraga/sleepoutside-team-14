@@ -1,0 +1,12 @@
+[
+  {
+    "message": "Special Announcement! Check out our new arrivals.",
+    "background": "darkblue",
+    "color": "white"
+  },
+  {
+    "message": "Limited Time Offer! Get 20% off on all items.",
+    "background": "darkred",
+    "color": "yellow"
+  }
+]
