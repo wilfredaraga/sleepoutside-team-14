@@ -12,5 +12,11 @@ const productList = new ProductList("tents", dataSource, listElement);
 productList.init();
 
 
+  // Update the <em> element's content with the total number of items
+  if (cartCountElement) {
+    cartCountElement.textContent = totalItems;
+  }
+}
 
-
+updateCartCount();
+loadHeaderFooter();

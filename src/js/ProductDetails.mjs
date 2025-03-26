@@ -32,18 +32,18 @@ export default class ProductDetails {
 
     addToCart() {
        const cartItems = getLocalStorage("so-cart") || [];
-    const existingProduct = cartItems.find(item => item.Id === this.product.Id);
+      const existingProduct = cartItems.find(item => item.Id === this.product.Id);
 
-    if (existingProduct) {
+      if (existingProduct) {
 
-      // The find() method in JavaScript returns a reference to the found object. 
-      // This means any changes made to the object returned by find() will modify the original object in the array. 
-      existingProduct.quantity = (existingProduct.quantity || 1) + 1; // Increment quantity
-    } else {
-      cartItems.push(this.product); // Add new product with quantity 1
-    }
+        // The find() method in JavaScript returns a reference to the found object. 
+        // This means any changes made to the object returned by find() will modify the original object in the array. 
+        existingProduct.quantity = (existingProduct.quantity || 1) + 1; // Increment quantity
+      } else {
+        cartItems.push(this.product); // Add new product with quantity 1
+      }
 
-    setLocalStorage("so-cart", cartItems);
+      setLocalStorage("so-cart", cartItems);
     }
 
   renderProductDetails(selector) {

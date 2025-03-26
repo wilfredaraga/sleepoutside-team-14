@@ -88,3 +88,27 @@ export function updateCartCount(cartItems) {
     cartCountElement.textContent = totalItems;
   }
 }
+
+export function renderWithTemplate(templateFn, parentElement, data, callback){
+  parentElement.innerHTML = templateFn;
+  if(callback){
+    callback(data)
+  }
+}
+
+async function loadTemplate(path){
+  const result = await fetch(path);
+  const template = await result.text();
+  return template;
+}
+
+export async function loadHeaderFooter(){
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const footerTemplate = await loadTemplate("../partials/footer.html");
+
+  const headerElement = document.querySelector("#main-header");
+  const footerElement = document.querySelector("#main-footer");
+
+  renderWithTemplate(headerTemplate, headerElement)
+  renderWithTemplate(footerTemplate, footerElement)
+}
