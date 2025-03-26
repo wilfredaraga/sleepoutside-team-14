@@ -22,19 +22,71 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
+
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get(param);
+  const product = urlParams.get(param)
   return product;
 }
 
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
-  const htmlStrings = list.map(templateFn);
-  if(clear){
-    parentElement.innerHTML = "";
+    if(clear) parentElement.innerHTML = "";
+    parentElement.insertAdjacentHTML(position, list.map(templateFn).join(""));
+}
+
+export function renderWithTemplate(template, parentElement, data, callback){
+    parentElement.innerHTML = template;
+    if(callback) {
+      callback(data);
+    }
+}
+
+
+
+export async function loadTemplate(path){
+    const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+export async function loadHeaderFooter(){
+    
+   const headerTemplate = await loadTemplate("../partials/header.html");
+   
+  const footerTemplate = await loadTemplate("../partials/footer.html");
+
+  const headerElement = document.querySelector("#main-header");
+ 
+  const footerElement = document.querySelector("#main-footer");
+
+  const cartItems = getLocalStorage("so-cart") || [];
+  
+  renderWithTemplate(headerTemplate, headerElement,cartItems,updateCartCount);
+  renderWithTemplate(footerTemplate, footerElement);
+
+    
+    
+}
+
+
+export function updateCartCount(cartItems) {
+  // Get cart items from localStorage (or initialize an empty array if none exist)
+ 
+
+  // Calculate the total number of items in the cart
+  let totalItems = 0;
+  cartItems.forEach(item => {
+    totalItems += item.quantity || 1; // Add item quantity, default to 1 if not defined
+  });
+
+  // Select the <em> element
+  const cartCountElement = document.querySelector(".cart em");
+
+  // Update the <em> element's content with the total number of items
+  if (cartCountElement) {
+    cartCountElement.textContent = totalItems;
   }
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""))
 }
 
 export function renderWithTemplate(templateFn, parentElement, data, callback){
