@@ -2,7 +2,7 @@ import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 import ExternalServices from "./ExternalServices.mjs";
 
-const services = new ExternalServices();
+ const services = new ExternalServices();
 
 // takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
 function packageItems(items) {
@@ -120,7 +120,9 @@ constructor(key, outputSelector) {
     //console.log(order);
 
     try {
+       
       const response = await services.checkout(order);
+      
       console.log(response);
     } catch (err) {
       console.log(err);

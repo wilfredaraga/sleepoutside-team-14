@@ -21,7 +21,8 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
         <div class="card-body order-summary">
-                <form method="POST" id="form-order" action="thankyou.html">
+                <form method="POST" name="checkout" >
+                  <input type="hidden" name="orderDate" id="orderDate">
                     <div class="rows form-row">
                           <h4 class="card-title">Personal Information</h4>
                           <div class="col-12 col-md-6">
@@ -55,7 +56,7 @@
                                 name="street" 
                                 placeholder="1234 Main St" 
                                 class="form-control"
-                                pattern="[a-zA-Z\- ]{7,}" 
+                                pattern="[a-zA-Z\-, ]{5,}" 
                                 title="The Street Name must contain at least 7 characters and only allow letters, hyphens, and spaces." 
                                 required>
                             </div>
@@ -139,7 +140,7 @@
                             <div class="checkout-summary">
                                 <div class="booking-item-wrap">
                                   <ul class="booking-date">
-                                    <li >Date <span class="date"></span></li>
+                                    <li >Date <span id="date-order"></span></li>
                                     <li >Time <span class="time"></span></li>
                                   </ul>
                                   <ul class="booking-fee">

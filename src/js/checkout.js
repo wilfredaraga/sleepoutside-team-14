@@ -1,11 +1,22 @@
 import { loadHeaderFooter } from "./utils.mjs";
 
-import ExternalServices from "./ExternalServices.mjs";
- 
-External = new ExternalServices();
+import  CheckoutProcess  from "./CheckoutProcess.mjs";
 
  loadHeaderFooter();
 
-form = document.querySelector("#form-order");
-External.sendData(form);
+ const order = new CheckoutProcess("so-cart", ".checkout-summary");
+order.init();
+
+// Add event listeners to fire calculateOrderTotal when the user changes the zip code
+document
+  .querySelector("#zip")
+  .addEventListener("blur", order.calculateOrderTotal.bind(order));
+
+// listening for click on the button
+document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  order.checkout();
+});
+
  
