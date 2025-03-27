@@ -1,4 +1,13 @@
 const baseURL = import.meta.env.VITE_SERVER_URL
+import CheckoutProcess from "./CheckoutProcess.mjs";
+
+
+ loadHeaderFooter();
+
+
+
+ const order = new CheckoutProcess("so-cart","div");
+ 
 
 function convertToJson(res) {
   if (res.ok) {
@@ -8,7 +17,7 @@ function convertToJson(res) {
   }
 }
 
-export default class ProductData {
+export default class ExternalServices {
   constructor() {
    
   }
@@ -22,5 +31,12 @@ export default class ProductData {
     const data = await convertToJson(response);
    
     return data.Result;
+  }
+
+  async sendData(form){
+    // http://wdd330-backend.onrender.com/checkout
+      const url =`${baseURL}checkout`;
+      order.init();
+      order.checkout(form,url);
   }
 }
