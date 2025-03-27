@@ -38,7 +38,7 @@ export default class ShoppingCart {
   }
 
   updateTotal() {
-    const cartTotal = document.querySelector(".cart-footer");
+   
     const totalElement = document.querySelector(".cart-total");
     if (totalElement){
         let total = 0;
@@ -49,7 +49,7 @@ export default class ShoppingCart {
         }
         totalElement.textContent = `Total: $${total.toFixed(2)}`;
     }
-     cartTotal.style.display = "block";
+    
   }
 
   updateCart(newCartItems){

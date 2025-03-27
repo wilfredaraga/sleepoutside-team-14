@@ -8,7 +8,7 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/checkout.js" type="module"></script>
   </head>
 
@@ -20,6 +20,140 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <div class="card-body order-summary">
+                <form method="get" action="thankyou.html">
+                    <div class="rows form-row">
+                          <h4 class="card-title">Personal Information</h4>
+                          <div class="col-12 col-md-6">
+                            <div class="form-group">
+                              <label for="firstname">First Name<span class="text-danger">*</span></label>
+                              <input
+                              id="firstname" required 
+                                type="text"
+                                class="form-control"
+                                placeholder="John"
+                                value=""
+                              />
+                            </div>
+
+                            <div class="form-group">
+                              <label for="lastname">Last Name<span class="text-danger">*</span></label>
+                              <input id="lastname" placeholder="Doe" required type="text" class="form-control" value="" />
+                            </div>
+                          </div>
+                        
+                          
+                        <h4 class="card-title"> Billing and Shipping address </h4>
+                          <div class="col-12 col-md-6">
+                            <div class="form-group">
+                              <label for="street">Street Address<span class="text-danger">*</span></label>
+
+                              <input 
+                                type="text" 
+                                id="street" 
+                                name="street" 
+                                placeholder="1234 Main St" 
+                                class="form-control"
+                                pattern="[a-zA-Z\- ]{7,}" 
+                                title="The Street Name must contain at least 7 characters and only allow letters, hyphens, and spaces." 
+                                required>
+                            </div>
+                          
+                            <div class="form-group">
+                              <label for="city">City<span class="text-danger">*</span></label>
+                              <input id="city" required
+                                type="text"
+                                placeholder="Salt Lake City"
+                                class="form-control"
+                              />
+                            </div>
+
+                            <div class="form-group">
+                              <label for="state">State <span class="text-danger">*</span></label>
+                              <input
+                                type="text" id="state" required
+                                class="form-control"
+                                placeholder="Utah"  
+                                value=""
+                              />
+                            </div>
+                          
+                            <div class="form-group">
+                              <label for="zip">Zip Code <span class="text-danger">*</span></label>
+                              <input
+                                type="text" id="zip" required
+                                class="form-control"
+                                placeholder="84101"  
+                                value=""
+                              />
+                            </div>
+                          </div>
+                          
+                          <h4 class="card-title">Payment Method</h4>
+                            <div class="col-12 col-md-6 card-label">
+                                <div class="form-group ">
+                                    <label for="card_number">Card Number</label>
+                                    <input class="form-control" id="card_number" placeholder="1234  5678  9876  5432" type="text">
+                                </div>
+                                <div class="form-group ">
+                                  <label for="expiry_year">Expiry Date</label>
+                                  <input class="form-control" type="date" id="expiry_year" placeholder="YYYY-MM-DD" type="text">
+                                </div>
+
+                                <div class="form-group ">
+                                  <label for="card_name">Security Code</label>
+                                  <input class="form-control"
+                                  pattern="[0-9]{3}"
+                                    title="The Security Code must contain 3 digits."
+                                    required
+                                  id="card_name" type="text">
+                                </div>
+                          </div>
+                          
+                              <input type="hidden" id="loadTime" name="loadTime">
+                         
+                          <div class="submit-section">
+                              <button type="submit" class="btn btn-primary submit-btn">
+                                Save Changes
+                              </button>
+                          </div>
+                    </div>
+
+                </form>
+
+                <div class="card booking-card">
+                      <div class="card-header">
+                          <h4 class="card-title"> Order Summary</h4>
+                      </div>
+                      <div class="card-body">
+
+                        <div class="booking-user-info">Subtotal
+
+                            <div class="booking-summary">
+                                <div class="booking-item-wrap">
+                                  <ul class="booking-date">
+                                    <li >Date <span class="date"></span></li>
+                                    <li >Time <span class="time"></span></li>
+                                  </ul>
+                                  <ul class="booking-fee">
+                                      <li >Subtotal <span class="subtotal"></span></li>
+                                      <li>Tax <span> 6% </span></li>
+                                      <li>Shipping Estimate <span>$10 for the first item + ($2*other items)</span></li>
+                                  </ul>
+                                  <div class="booking-total">
+                                  <ul class="booking-total-list">
+                                      <li>
+                                      <span>Order Total</span>
+                                      <span class="total-cost"></span>
+                                      </li>
+                                  </ul>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                 </div>
+
       </section>
     </main>
 
