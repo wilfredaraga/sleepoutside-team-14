@@ -30,10 +30,13 @@ export default class AlertMessage {
           alertListSection.appendChild(alertParagraph);
         });
 
-        this.mainElement.appendChild(alertListSection);
+        this.mainElement.prepend(alertListSection);
       
     } catch (error) {
-       throw new Error("Bad Response", error);
+      const errorMessage = document.createElement("p");
+      errorMessage.textContent = "Failed to load alerts. Please try again later.";
+      errorMessage.style.color = "red";
+      this.mainElement.prepend(errorMessage);
     }
   }
 

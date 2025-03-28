@@ -1,12 +1,12 @@
 [
   {
     "message": "Special Announcement! Check out our new arrivals.",
-    "background": "darkblue",
-    "color": "white"
+    "background": "#cff4fc",
+    "color": "#055160"
   },
   {
     "message": "Limited Time Offer! Get 20% off on all items.",
-    "background": "darkred",
-    "color": "yellow"
+    "background": "#e2e3e5",
+    "color": "#41464b"
   }
 ]

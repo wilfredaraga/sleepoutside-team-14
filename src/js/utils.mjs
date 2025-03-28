@@ -96,25 +96,41 @@ export function alertMessage(message, scroll = true) {
   const alert = document.createElement("div");
 
   // add a class to style the alert
-  alert.classList.add("alert alert-warning");
+  alert.classList.add("alert");
+  alert.classList.add("alert-warning");
   
-  alert.innerHTML= message+"<strong> X </strong>";
+  alert.innerHTML = `${message} <button id="close"> X </button>`;
   
   // set the contents. You should have a message and an X or something the user can click on to remove
    // add the alert to the top of main
   const main = document.querySelector("main");
-  console.log(main);
+  
   main.prepend(alert);
   // add a listener to the alert to see if they clicked on the X
   // if they did then remove the child
-  alert.addEventListener("click", function(e) {
-      if(e.target.tagName === "strong" ) { // how can you tell if they clicked on the X or on something else?  hint: check out e.target.tagName or e.target.innerText
-        main.removeChild(this);
-      }
+  document.querySelector("#close").addEventListener("click", function(e) {
+      //can you tell if they clicked on the X or on something else?  hint: check out e.target.tagName or e.target.innerText
+        main.removeChild(alert);
+      
   })
  
   // make sure they see the alert by scrolling to the top of the window
   // you may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
   if(scroll)
     window.scrollTo(0,0);
+}
+
+export function updateCartIcon() {
+  const cartItems =  getLocalStorage("so-cart") || []; // Get cart items from localStorage
+   let totalItems = 0;
+  cartItems.forEach(item => {
+    totalItems += item.quantity || 1; // Add item quantity, default to 1 if not defined
+  });
+
+  const cartIcon = document.querySelector(".cart em"); // Assuming you have a class 'cart-count' on your cart icon element
+
+  if (cartIcon) {
+     cartIcon.textContent = "";
+    cartIcon.textContent = totalItems;
+  }
 }
