@@ -13,17 +13,29 @@ document
   .addEventListener("blur", order.calculateOrderTotal.bind(order));
 
 // listening for click on the button
-document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
+
+const send = document.querySelector("#checkoutSubmit");
+send.addEventListener("click", (e) => {
   e.preventDefault();
    const formElement = document.forms["checkout"];
    const status = formElement.checkValidity();
    formElement.reportValidity();
    if(status){
         order.checkout();
-        document.querySelector("#checkoutSubmit").textContent = "";
-         document.querySelector("#checkoutSubmit").textContent = "Loading...";
+        send.textContent = "";
+        const spinner = document.createElement("span");
+        send.classList.add("spin-element");
+               spinner.setAttribute("role", "status");
+              spinner.textContent = "Processing...";
+               send.appendChild(spinner);
+               
+               
         localStorage.clear();
-        window.location.href = "/checkout/success.html";
+        setTimeout(() => { 
+              window.location.href = "/checkout/success.html";
+            }, 5000);
+              
+               
    }else{
        
           const invalidFields = [];
