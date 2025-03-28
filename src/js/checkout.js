@@ -1,4 +1,4 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter,alertMessage  } from "./utils.mjs";
 
 import  CheckoutProcess  from "./CheckoutProcess.mjs";
 
@@ -15,8 +15,19 @@ document
 // listening for click on the button
 document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
   e.preventDefault();
-
-  order.checkout();
+   const formElement = document.forms["checkout"];
+   const status= formElement.checkValidity();
+   formElement.reportValidity();
+   if(status){
+        order.checkout();
+        document.querySelector("#checkoutSubmit").textContent="";
+         document.querySelector("#checkoutSubmit").textContent="Loading...";
+        localStorage.clear();
+        window.location.href="/checkout/success.html";
+   }else{
+        alertMessage(formElement.reportValidity());
+   }
+  
 });
 
  

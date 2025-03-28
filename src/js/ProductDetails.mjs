@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -16,13 +16,16 @@ export default class ProductDetails {
 
      
       // The product details are needed before rendering the HTML
-      this.renderProductDetails("main");
+      this.renderProductDetails();
 
       // Once the HTML is rendered, add a listener to the Add to Cart button
       // Notice the .bind(this). This callback will not work if the bind(this) is missing.
       // Review the readings from this week on 'this' to understand why.
       document.getElementById("addToCart")
         .addEventListener("click", this.addToCart.bind(this));
+        
+         alertMessage("Product successfully added");
+       
     } catch (error) {
        //console.error(error);
       // Handle error gracefully (e.g., display an error message to the user)
@@ -46,25 +49,25 @@ export default class ProductDetails {
     setLocalStorage("so-cart", cartItems);
     }
 
-  renderProductDetails(selector) {
-        const productContainer = document.querySelector(selector);
-
-        const template = document.querySelector("#product-template");
-        const clone = template.content.cloneNode(true);
-        const productDetailsElement = clone.querySelector(".product-detail");
-
-        // Populate the cloned template with product data
-        clone.querySelector("h3").textContent = this.product.Brand.Name;
-        clone.querySelector("h2").textContent = this.product.NameWithoutBrand;
-        clone.querySelector("img").src = this.product.Images.PrimaryLarge;
-        clone.querySelector("img").alt = this.product.NameWithoutBrand;
-        clone.querySelector(".product-card__price").textContent = `$${this.product.ListPrice}`;
-        clone.querySelector(".product__color").textContent = this.product.Colors[0].ColorName;
-        clone.querySelector(".product__description").innerHTML = this.product.DescriptionHtmlSimple;
-        clone.querySelector("#addToCart").dataset.id = this.product.Id;
-
-        productContainer.appendChild(productDetailsElement);
+  renderProductDetails() {
+       productDetailsTemplate(this.product)
 }
 
 
+}
+
+function productDetailsTemplate(product) {
+
+   document.querySelector("h3").textContent = product.Brand.Name;
+        document.querySelector("h2").textContent = product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
+        document.querySelector("img").src = product.Images.PrimaryLarge;
+        document.querySelector("img").alt = product.NameWithoutBrand;
+        const euroPrice = new Intl.NumberFormat('de-DE',
+          {
+            style: 'currency', currency: 'EUR',
+          }).format(Number(product.FinalPrice) * 0.85);
+        document.querySelector(".product-card__price").textContent = `$${euroPrice}`;
+        document.querySelector(".product__color").textContent = product.Colors[0].ColorName;
+        document.querySelector(".product__description").innerHTML = product.DescriptionHtmlSimple;
+        document.querySelector("#addToCart").dataset.id = product.Id;
 }

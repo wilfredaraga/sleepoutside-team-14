@@ -57,11 +57,14 @@ constructor(key, outputSelector) {
     const itemNumElement = document.querySelector(
       this.outputSelector + " #num-items"
     );
-    itemNumElement.innerText = this.list.length;
-    // calculate the total of all the items in the cart
-    const amounts = this.list.map((item) => item.FinalPrice);
-    this.itemTotal = amounts.reduce((sum, item) => sum + item);
-    summaryElement.innerText = `$${this.itemTotal}`;;
+    if(this.list){
+        itemNumElement.innerText = this.list.length;
+  
+        // calculate the total of all the items in the cart
+        const amounts = this.list.map((item) => item.FinalPrice);
+        this.itemTotal = amounts.reduce((sum, item) => sum + item);
+        summaryElement.innerText = `$${this.itemTotal}`;
+      }
   }
 
     calculateItemSubTotal() {
@@ -122,8 +125,8 @@ constructor(key, outputSelector) {
     try {
        
       const response = await services.checkout(order);
+      console.log("Process completed");
       
-      console.log(response);
     } catch (err) {
       console.log(err);
     }

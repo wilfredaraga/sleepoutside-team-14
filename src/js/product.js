@@ -1,10 +1,10 @@
 import { getParam, loadHeaderFooter } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 
 
 loadHeaderFooter();
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const productId = getParam("product");
 
 const product = new ProductDetails(productId, dataSource);
@@ -21,9 +21,24 @@ product.init();
 // // add to cart button event handler
 // async function addToCartHandler(e) {
 //   const products = await dataSource.findProductById(e.target.dataset.id);
+//   console.log(products);
 //   addProductToCart(products);
 // }
 
+// const addCart=document.getElementById("addToCart");
+//  console.log(addCart);
+// if(addCart){
+//     addCart.addEventListener("click", (e)=>{
+//         alertMessage("Product successfully added");
+//         alert("Prodct Success");
+//             addToCartHandler(e);
+            
+            
+//      });
+// }
+
+        
+     
 
 
 

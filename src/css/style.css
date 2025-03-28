@@ -269,20 +269,6 @@ footer {
    
 }
 
-.btn-primary {
-    background-color: #1e88e5;
-    border: 1px solid #1e88e5;
-}
-
-.btn-primary {
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    height:40px;
-    vertical-align: middle;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-}
 
 .cart-footer{
   display: flex;
@@ -383,6 +369,13 @@ label {
   min-width: 120px;
 }
 
+/* input:invalid {
+  border: 2px dashed red;
+} */
+
+input:valid {
+  border: 2px solid black;
+}
 .text-danger {
   color: #ff0100 !important;
 }
@@ -458,4 +451,55 @@ form {
   font-weight: 500;
   line-height: 1.2;
   text-align: center;
+}
+
+
+
+@keyframes example {
+  0%   {background-color:#0d6efd; border: 1px solid #0d6efd;  }
+  25%  {background-color:#014f86; border: 1px solid #014f86; }
+  50%  {background-color:#01497c;  border: 1px solid #01497c; }
+  75%  {background-color:#014f86; border: 1px solid #014f86;  }
+  100% {background-color: rgb(6, 56, 92); border: 1px solid rgb(6, 56, 92) ; }
+}
+
+
+.btn-primary {
+    background-color: #1e88e5;
+    border: 1px solid #1e88e5;
+}
+
+.btn-primary {
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    height:40px;
+    vertical-align: middle;
+    background-color: #0d6efd;
+     border-color: #0d6efd;
+    animation-name:example;
+    animation-duration: 10s;
+    animation-delay:2s;
+    animation-iteration-count:3;
+    animation-direction: reverse;
+   
+}
+
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+.alert-success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+}
+
+.alert-warning {
+    color: #664d03;
+    background-color: #fff3cd;
+    border-color: #ffecb5;
 }
