@@ -21,6 +21,18 @@ export default class ProductDetails {
       // Once the HTML is rendered, add a listener to the Add to Cart button
       // Notice the .bind(this). This callback will not work if the bind(this) is missing.
       // Review the readings from this week on 'this' to understand why.
+      
+      //Add discount amount
+      const retailPrice = this.product.SuggestedRetailPrice
+      const finalPrice = this.product.FinalPrice
+
+      if (retailPrice > finalPrice){
+        const discount = document.querySelector(".amount_discounted");
+        const amountOfDiscount = retailPrice-finalPrice;
+
+        discount.innerHTML = amountOfDiscount;
+      }
+
       document.getElementById("addToCart")
         .addEventListener("click", this.addToCart.bind(this));
     } catch (error) {
@@ -59,6 +71,7 @@ function productDetailsTemplate(product) {
         alt="${product.NameWithoutBrand}"
       />
       <p class="product-card__price">$${product.FinalPrice}</p>
+      <p class="amount_discounted">$</p>
       <p class="product__color">${product.Colors[0].ColorName}</p>
       <p class="product__description">
       ${product.DescriptionHtmlSimple}
