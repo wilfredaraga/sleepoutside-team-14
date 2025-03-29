@@ -25,6 +25,6 @@ _BYU-Pathway Worldwide improves lives through access to spiritually based, onlin
 
 
 # Team 14
-Netlify deployment link: https://comfy-duckanoo-1dac12.netlify.app/
+Netlify deployment link: https://deluxe-valkyrie-6ced40.netlify.app/
 
 
