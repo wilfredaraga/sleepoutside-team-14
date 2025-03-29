@@ -105,7 +105,7 @@ constructor(key, outputSelector) {
     shipping.innerText = `$${this.shipping.toFixed(2)}`;
     orderTotal.innerText = `$${this.orderTotal.toFixed(2)}`;
     const date = document.querySelector(`${this.outputSelector} #date-order`);
-    date.innerText=new Date().toISOString();
+    date.innerText = new Date().toISOString();
   }
 
   async checkout() {
@@ -125,10 +125,17 @@ constructor(key, outputSelector) {
     try {
        
       const response = await services.checkout(order);
-      console.log("Process completed");
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        //console.log(jsonResponse);
+        return jsonResponse;
+      } else {
+        throw new Error("Error processing order");
+      }
+     
       
     } catch (err) {
-      console.log(err);
+      return err;
     }
   }
 
