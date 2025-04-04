@@ -8,14 +8,14 @@ import ShoppingCart from "./shoppingCart.mjs";
 const cartItems = getLocalStorage("so-cart");
 console.log(cartItems);
 
-const shoppingCart = new ShoppingCart(
-  cartItems,
-  "#cart-item-template",
-  ".product-list"
-);
-
+const shoppingCart = new ShoppingCart("so-cart",  ".product-list");
+shoppingCart.init()
 shoppingCart.renderCartItems();
 
+if (cart.total > 0) {
+  // show our checkout button and total if there are items in the cart.
+  document.querySelector(".list-footer").classList.remove("hide");
+}
 
 // function renderCartContents() {
 //   const cartItems = getLocalStorage("so-cart");

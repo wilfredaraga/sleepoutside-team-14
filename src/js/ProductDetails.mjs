@@ -26,14 +26,14 @@ export default class ProductDetails {
     this.dataSource = dataSource;
   }
 
-    async init() {
-         
+  async init() {
+        
     try {
       // Use the datasource to get the details for the current product.
       // findProductById will return a promise! use await or .then() to process it
       this.product = await this.dataSource.findProductById(this.productId);
 
-     
+    
       // The product details are needed before rendering the HTML
       this.renderProductDetails("main");
 
@@ -56,32 +56,32 @@ export default class ProductDetails {
         .getElementById("addToCart")
         .addEventListener("click", this.addToCart.bind(this));
     } catch (error) {
-       //console.error(error);
+      //console.error(error);
       // Handle error gracefully (e.g., display an error message to the user)
     }
   }
         
 
-    addToCart() {
-       const cartItems = getLocalStorage("so-cart") || [];
-      const existingProduct = cartItems.find(item => item.Id === this.product.Id);
+  addToCart() {
+      const cartItems = getLocalStorage("so-cart") || [];
+    const existingProduct = cartItems.find(item => item.Id === this.product.Id);
 
-      if (existingProduct) {
+    if (existingProduct) {
 
-        // The find() method in JavaScript returns a reference to the found object. 
-        // This means any changes made to the object returned by find() will modify the original object in the array. 
-        existingProduct.quantity = (existingProduct.quantity || 1) + 1; // Increment quantity
-      } else {
-        cartItems.push(this.product); // Add new product with quantity 1
-      }
-
-      setLocalStorage("so-cart", cartItems);
+      // The find() method in JavaScript returns a reference to the found object. 
+      // This means any changes made to the object returned by find() will modify the original object in the array. 
+      existingProduct.quantity = (existingProduct.quantity || 1) + 1; // Increment quantity
+    } else {
+      cartItems.push(this.product); // Add new product with quantity 1
     }
+
+    setLocalStorage("so-cart", cartItems);
+  }
 
   renderProductDetails(selector) {
     const element = document.querySelector(selector);
-        element.insertAdjacentHTML(
-          "afterBegin",
-    productDetailsTemplate(this.product));
-}
+    element.insertAdjacentHTML(
+      "afterBegin",
+      productDetailsTemplate(this.product));
+  }
 }
