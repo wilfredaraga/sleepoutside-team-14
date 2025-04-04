@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { alertMessage, getLocalStorage, setLocalStorage, removeAllAlerts } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -56,7 +56,7 @@ export default class CheckoutProcess{
     }
 
     calculateOrderTotal() {
-        this.tax = (this.itemTotal * 0.06);
+        this.tax = (this.itemTotal * 0.06).toFixed(2);
         this.shipping = 10 + (this.list.length - 1) *2;
         this.orderTotal = (
             parseFloat(this.itemTotal) + 
@@ -77,23 +77,39 @@ export default class CheckoutProcess{
         shipping.innerText = `${this.shipping.toFixed(2)}`;
         orderTotal.innerText = `${this.orderTotal.toFixed(2)}`;
     }
-}
 
-async checkout() {
-    const formElement = document.forms["checkout"];
-    const order = formDataToJSON(formElement);
+    async checkout() {
+        const formElement = document.forms["checkout"];
+        const order = formDataToJSON(formElement);
 
-    order.orderDate = new Date().toISOString();
-    order.orderTotal = this.orderTotal;
-    order.tax = this.tax;
-    order.shipping = this.shipping;
-    order.items = packageItems(this.list);
+        order.orderDate = new Date().toISOString();
+        order.orderTotal = this.orderTotal;
+        order.tax = this.tax;
+        order.shipping = this.shipping;
+        order.items = packageItems(this.list);
 
-    try {
-        const response = await services.checkout(order);
-        console.log(response);
-    } catch (error) {
-        console.log.error;
+        try {
+            const response = await services.checkout(order);
+            console.log(response);
+            setLocalStorage("so-cart", []);
+            location.assign("/checkout/success.html")
+        } catch (error) {
+            removeAllAlerts();
+            for (let message in error.message){
+                alertMessage(error.message[message])
+            }
+
+            console.log.error;
+        }
+
+        document.querySelector("#checkoutSubmit")
+            .addEventListener("click", (e) => {
+                e.preventDefault()
+                const myForm = document.forms[0];
+                const chk_status = myForm.checkValidity();
+                myForm.reportValidity();
+            if (chk_status)
+                myCheckout.checkout();
+            });
     }
-
-}
+};

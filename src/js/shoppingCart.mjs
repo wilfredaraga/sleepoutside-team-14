@@ -1,10 +1,23 @@
 // ShoppingCart.mjs
 
+import { getLocalStorage } from "./utils.mjs";
+
 export default class ShoppingCart {
-  constructor(cartItems, templateSelector, containerSelector) {
-    this.cartItems = cartItems;
-    this.template = document.querySelector(templateSelector);
-    this.container = document.querySelector(containerSelector);
+  constructor(key, parentSelector) {
+    this.key = key;
+    this.parentSelector = parentSelector;
+    this.total = 0;
+  }
+
+  async init() {
+    const list = getLocalStorage(this.key)
+    this.calculateListTotal(list);
+    this.renderCartItems(list);
+  }
+
+  calculateListTotal(list) {
+    const amounts = list.map((item) => item.FinalPrice);
+    this.total = amounts.reduce((sum, item) => sum + item);
   }
 
   renderCartItems() {
