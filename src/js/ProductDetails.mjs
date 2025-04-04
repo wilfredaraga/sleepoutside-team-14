@@ -10,7 +10,7 @@ function productDetailsTemplate(product) {
     />
     <p class="product-card__price">$${product.FinalPrice}</p>
     <p class="amount_discounted">$</p>
-    <p class="product__color">${product.Colors[0].ColorName}</p>
+    <p class="product__color"></p>
     <p class="product__description">
     ${product.DescriptionHtmlSimple}
     </p>
@@ -26,8 +26,7 @@ export default class ProductDetails {
     this.dataSource = dataSource;
   }
 
-  async init() {
-        
+  async init() {    
     try {
       // Use the datasource to get the details for the current product.
       // findProductById will return a promise! use await or .then() to process it
@@ -55,6 +54,14 @@ export default class ProductDetails {
       document
         .getElementById("addToCart")
         .addEventListener("click", this.addToCart.bind(this));
+
+      //Display other colors
+      const colorElement = document.querySelector("product__color");
+      this.product.Colors.forEach((key, value) => {
+        colorElement.textContent = value;
+      });
+
+
     } catch (error) {
       //console.error(error);
       // Handle error gracefully (e.g., display an error message to the user)
