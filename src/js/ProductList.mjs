@@ -27,6 +27,13 @@ export default class ProductList{
         // the dataSource will return a Promise...so you can use await to resolve it.
         const list = await this.dataSource.getData(this.category);
         // next, render the list – ** future **
+        list.sort(function(a,b){
+            let name1 = a.NameWithoutBrand.toLowerCase();
+            let name2 = b.NameWithoutBrand.toLowerCase();
+            if (name1 < name2) {return -1}
+            if (name1 > name2) {return 1}
+            return 0;
+        })
         this.renderList(list);
         document.querySelector(".title").textContent = this.category;
        } catch (error) {
