@@ -5,14 +5,15 @@ import Alert from "./AlertMessage.mjs";
 import {  loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter();
-const Services = new ExternalServices();
-const dataSource = Services.getData("tents");
+
+const dataSource = new ExternalServices();
 
 const info = new Alert("../json/alert.json", "main");
 
 
  info.displayAlerts();
 const listElement = document.querySelector(".product-list") || document.createElement("ul");
+
 const productList = new ProductList("tents", dataSource, listElement);
 productList.init();
 
